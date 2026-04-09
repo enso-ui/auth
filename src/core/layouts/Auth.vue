@@ -1,24 +1,27 @@
 <script>
-import { mapState, mapActions } from 'vuex';
+import { loadGuestState } from '@enso-ui/ui/src/pinia/loadState';
 
 export default {
     name: 'Auth',
 
-    computed: {
-        ...mapState(['guestState']),
-    },
+    data: () => ({
+        ready: false,
+    }),
 
-    created() {
-        this.loadGuestState();
+    async created() {
+        await this.loadGuestState();
+        this.ready = true;
     },
 
     methods: {
-        ...mapActions(['loadGuestState']),
+        loadGuestState() {
+            return loadGuestState();
+        },
     },
 
     render() {
         return this.$slots.default({
-            guestState: this.guestState,
+            guestState: this.ready,
         });
     },
 };

@@ -10,15 +10,15 @@
                 autocomplete="email"
                 @input="$emit('update:modelValue', $event.target.value); errors.clear('email')">
             <span class="icon is-small is-left">
-                <fa icon="envelope"/>
+                <fa :icon="faEnvelope"/>
             </span>
             <span v-if="successful"
                 class="icon is-small is-right has-text-success">
-                <fa icon="check"/>
+                <fa :icon="faCheck"/>
             </span>
             <span v-if="errors.has('email')"
                 class="icon is-small is-right has-text-danger">
-                <fa icon="exclamation-triangle"/>
+                <fa :icon="faExclamationTriangle"/>
             </span>
         </div>
         <p class="has-text-danger is-size-7"
@@ -30,11 +30,8 @@
 
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faExclamationTriangle, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { focus } from '@enso-ui/directives';
-
-library.add(faCheck, faExclamationTriangle, faEnvelope);
 
 export default {
     name: 'Email',
@@ -59,5 +56,11 @@ export default {
             return this.state.successful;
         },
     },
+
+    data: () => ({
+        faCheck,
+        faEnvelope,
+        faExclamationTriangle,
+    }),
 };
 </script>

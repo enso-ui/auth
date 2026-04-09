@@ -9,18 +9,21 @@
         <remember v-model="payload.remember"
             v-if="!isWebview"/>
         <template #footer>
-            <router-link class="is-pulled-right"
-                :to="{ name: 'password.email' }">
-                {{ i18n('Forgot password') }}
-            </router-link>
-            <div class="is-clearfix"/>
+            <div class="auth-footer is-flex is-justify-content-flex-end mt-3">
+                <router-link class="auth-footer-link is-flex is-align-items-center"
+                    :to="{ name: 'password.email' }">
+                    {{ i18n('Forgot password') }}
+                </router-link>
+            </div>
         </template>
     </auth-form>
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex';
 import Errors from '@enso-ui/laravel-validation';
+import { app } from '@enso-ui/ui/src/pinia/app';
+import { layout } from '@enso-ui/ui/src/pinia/layout';
+import { auth } from '../../../pinia/auth';
 import AuthForm from './components/AuthForm.vue';
 import Email from './components/fields/Email.vue';
 import Password from './components/fields/Password.vue';
@@ -45,14 +48,24 @@ export default {
     }),
 
     computed: {
-        ...mapState(['meta']),
-        ...mapGetters(['isWebview']),
+        meta() {
+            return app().meta;
+        },
+        isWebview() {
+            return app().isWebview;
+        },
     },
 
     methods: {
-        ...mapMutations('auth', ['login']),
-        ...mapMutations('layout', ['home']),
-        ...mapMutations(['setShowQuote']),
+        login() {
+            auth().login();
+        },
+        home(value) {
+            layout().setHome(value);
+        },
+        setShowQuote(value) {
+            app().setShowQuote(value);
+        },
         init() {
             this.setShowQuote(this.meta.showQuote);
 

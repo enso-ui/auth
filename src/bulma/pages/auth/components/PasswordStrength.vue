@@ -1,8 +1,7 @@
 <template>
-    <transition enter-active-class="zoomIn"
-        leave-active-class="zoomOut">
+    <transition enter-active-class="animate__animated animate__zoomIn"
+        leave-active-class="animate__animated animate__zoomOut">
         <svg v-if="password"
-            class="animated"
             width="100%"
             height="5"
             version="1.1"

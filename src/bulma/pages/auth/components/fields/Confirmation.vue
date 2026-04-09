@@ -9,18 +9,21 @@
                 @input="$emit('update:modelValue', $event.target.value);
                     errors.clear('password')">
             <span class="icon is-small is-left">
-                <fa icon="lock"/>
+                <fa :icon="faLock"/>
             </span>
             <reveal-password :meta="meta"
-                :class="{ 'mr-5': match || successful || errors.has('password')}"
+                :class="[
+                    'has-text-dark',
+                    { 'mr-5': match || successful || errors.has('password') }
+                ]"
                 v-if="modelValue && !successful"/>
             <span v-if="errors.has('password')"
                 class="icon is-small is-right has-text-danger">
-                <fa icon="exclamation-triangle"/>
+                <fa :icon="faExclamationTriangle"/>
             </span>
             <span v-if="match && !errors.has('password') || successful"
                 class="icon is-small is-right has-text-success">
-                <fa icon="check"/>
+                <fa :icon="faCheck"/>
             </span>
         </div>
         <p class="has-text-danger is-size-7"
@@ -32,12 +35,9 @@
 
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faExclamationTriangle, faLock } from '@fortawesome/free-solid-svg-icons';
 import { focus } from '@enso-ui/directives';
 import RevealPassword from '@enso-ui/forms/src/bulma/parts/RevealPassword.vue';
-
-library.add(faCheck, faExclamationTriangle, faLock);
 
 export default {
     name: 'Confirmation',
@@ -62,6 +62,9 @@ export default {
     emits: ['update:modelValue'],
 
     data: () => ({
+        faCheck,
+        faExclamationTriangle,
+        faLock,
         meta: {
             content: 'password',
         },

@@ -1,11 +1,10 @@
-import store from '@enso-ui/ui/src/core/services/store';
-
 const Login = () => import('../pages/auth/Login.vue');
 const Email = () => import('../pages/auth/password/EmailResetLink.vue');
 const Reset = () => import('../pages/auth/password/Reset.vue');
+import { auth } from '../pinia/auth';
 
 const redirect = (to, from, next) => {
-    if (store.state.auth.isAuth) {
+    if (auth().isAuth) {
         next({ path: '/' });
     } else {
         next();

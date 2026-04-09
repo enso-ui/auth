@@ -1,9 +1,10 @@
 <template>
-    <section class="hero is-fullheight is-primary is-bold">
-        <div class="hero-body">
-            <div class="container">
+    <section class="hero is-fullheight auth-shell">
+        <div class="hero-body auth-shell-body">
+            <div class="container auth-shell-container">
                 <core-auth v-slot="{ guestState }">
-                    <router v-if="guestState"/>
+                    <router-view v-if="guestState"
+                        :key="$route.path"/>
                 </core-auth>
             </div>
         </div>
@@ -11,12 +12,67 @@
 </template>
 
 <script>
-import Router from '@enso-ui/ui/src/bulma/pages/Router.vue';
 import CoreAuth from '../../core/layouts/Auth.vue';
 
 export default {
     name: 'Auth',
 
-    components: { CoreAuth, Router },
+    components: { CoreAuth },
 };
 </script>
+
+<style lang="scss">
+    .auth-shell {
+        position: relative;
+        overflow: hidden;
+        background:
+            radial-gradient(circle at 16% 18%, rgba(255, 255, 255, 0.2), transparent 26%),
+            radial-gradient(circle at 84% 14%, rgba(123, 92, 255, 0.16), transparent 28%),
+            radial-gradient(circle at 78% 74%, rgba(255, 176, 0, 0.13), transparent 24%),
+            linear-gradient(135deg, #041a2e 0%, #0c3854 32%, #0f8e96 70%, #18d2c5 100%);
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            inset: auto;
+            pointer-events: none;
+        }
+
+        &::before {
+            top: -12rem;
+            left: -8rem;
+            width: 34rem;
+            height: 34rem;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 66%);
+            filter: blur(14px);
+        }
+
+        &::after {
+            right: -10rem;
+            bottom: -10rem;
+            width: 38rem;
+            height: 38rem;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(2, 12, 27, 0.42) 0%, rgba(2, 12, 27, 0) 68%);
+            filter: blur(18px);
+        }
+    }
+
+    .auth-shell-body {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+    }
+
+    .auth-shell-container {
+        position: relative;
+    }
+
+    @media screen and (max-width: 768px) {
+        .auth-shell-body {
+            min-height: 100vh;
+        }
+    }
+</style>

@@ -1,22 +1,19 @@
 <template>
-    <button class="button is-primary is-fullwidth"
+    <button class="button is-dark is-fullwidth"
         :class="{ 'is-loading': loading }"
         type="submit"
         @click.prevent="submit">
         <span class="icon is-small">
-            <fa :icon="icon"/>
+            <fa :icon="resolvedIcon"/>
         </span>
         <span>{{ i18n(action) }}</span>
     </button>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { app } from '@enso-ui/ui/src/pinia/app';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
-
-library.add(faLock, faUser);
 
 export default {
     name: 'Submit',
@@ -31,7 +28,7 @@ export default {
             required: true,
         },
         icon: {
-            type: String,
+            type: [String, Object],
             required: true,
         },
         endpoint: {
@@ -51,7 +48,19 @@ export default {
     }),
 
     computed: {
-        ...mapGetters(['isWebview']),
+        resolvedIcon() {
+            if (typeof this.icon !== 'string') {
+                return this.icon;
+            }
+
+            return {
+                lock: faLock,
+                user: faUser,
+            }[this.icon] ?? this.icon;
+        },
+        isWebview() {
+            return app().isWebview;
+        },
         config() {
             return this.isWebview
                 ? { headers: { isWebview: true } }

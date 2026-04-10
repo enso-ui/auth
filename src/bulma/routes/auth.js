@@ -1,7 +1,7 @@
 const Login = () => import('../pages/auth/Login.vue');
 const Email = () => import('../pages/auth/password/EmailResetLink.vue');
 const Reset = () => import('../pages/auth/password/Reset.vue');
-import { auth } from '../pinia/auth';
+import { auth } from '../../pinia/auth';
 
 const redirect = (to, from, next) => {
     if (auth().isAuth) {

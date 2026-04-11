@@ -20,7 +20,7 @@
 
 <script>
 import Errors from '@enso-ui/laravel-validation';
-import { useStore } from '@enso-ui/ui/src/core/services/pinia';
+import { app } from '@enso-ui/ui/src/pinia/app';
 import Submit from './Submit.vue';
 
 export default {
@@ -48,7 +48,7 @@ export default {
 
     computed: {
         meta() {
-            return useStore('app').meta;
+            return app().meta;
         },
     },
 };

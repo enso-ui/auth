@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { useStore } from '@enso-ui/ui/src/core/services/pinia';
+import { app } from '@enso-ui/ui/src/pinia/app';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -59,7 +59,7 @@ export default {
             }[this.icon] ?? this.icon;
         },
         isWebview() {
-            return useStore('app').isWebview;
+            return app().isWebview;
         },
         config() {
             return this.isWebview

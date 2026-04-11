@@ -21,8 +21,7 @@
 
 <script>
 import Errors from '@enso-ui/laravel-validation';
-import { app } from '@enso-ui/ui/src/pinia/app';
-import { layout } from '@enso-ui/ui/src/pinia/layout';
+import { useStore } from '@enso-ui/ui/src/core/services/pinia';
 import { auth } from '../../../pinia/auth';
 import AuthForm from './components/AuthForm.vue';
 import Email from './components/fields/Email.vue';
@@ -41,6 +40,7 @@ export default {
     data: () => ({
         errors: new Errors(),
         payload: {
+            device_name: navigator.userAgent || 'browser',
             email: '',
             password: '',
             remember: false,
@@ -49,10 +49,10 @@ export default {
 
     computed: {
         meta() {
-            return app().meta;
+            return useStore('app').meta;
         },
         isWebview() {
-            return app().isWebview;
+            return useStore('app').isWebview;
         },
     },
 
@@ -61,10 +61,10 @@ export default {
             auth().login();
         },
         home(value) {
-            layout().setHome(value);
+            useStore('layout').setHome(value);
         },
         setShowQuote(value) {
-            app().setShowQuote(value);
+            useStore('app').setShowQuote(value);
         },
         init() {
             this.setShowQuote(this.meta.showQuote);

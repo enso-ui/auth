@@ -27,7 +27,14 @@ export const auth = defineStore('auth', {
             localStorage.removeItem('authorization');
         },
         async logout() {
-            await axios.post('/api/logout');
+            try {
+                await axios.post('/api/logout');
+            } catch (error) {
+                if (error.response?.status !== 401) {
+                    throw error;
+                }
+            }
+
             this.logoutState();
             const { default: router } = await getRouter();
             router.push({ name: 'login' });

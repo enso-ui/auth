@@ -12,13 +12,22 @@
                 height="4"
                 stroke-width="4"
                 :x="x(i)"
-                :stroke="i <= score() + 1 ? 'green' : 'orangered'"/>
+                :stroke="i <= scoreValue + 1 ? 'green' : 'orangered'"/>
         </svg>
     </transition>
 </template>
 
 <script>
-import zxcvbn from 'zxcvbn';
+let zxcvbnPromise;
+
+const getZxcvbn = async () => {
+    if (!zxcvbnPromise) {
+        zxcvbnPromise = import('zxcvbn')
+            .then(({ default: zxcvbn }) => zxcvbn);
+    }
+
+    return zxcvbnPromise;
+};
 
 export default {
     name: 'PasswordStrength',
@@ -30,12 +39,26 @@ export default {
         },
     },
 
-    methods: {
-        score() {
-            return this.password
-                ? zxcvbn(this.password).score
-                : 6;
+    data: () => ({
+        scoreValue: 0,
+    }),
+
+    watch: {
+        password: {
+            immediate: true,
+            async handler(password) {
+                if (!password) {
+                    this.scoreValue = 0;
+                    return;
+                }
+
+                const zxcvbn = await getZxcvbn();
+                this.scoreValue = zxcvbn(password).score;
+            },
         },
+    },
+
+    methods: {
         x(i) {
             const x = 2.5 + (i - 1) * 15 + (i - 1) * 5;
             return `${x}%`;

@@ -73,7 +73,8 @@ export default {
 
         .control .input,
         .control.has-icons-left .input,
-        .control.has-icons-right .input {
+        .control.has-icons-right .input,
+        .control .select select {
             background-color: #f7fbff;
             border-color: #c6d3e1;
             color: #0f172a;
@@ -81,6 +82,18 @@ export default {
             &::placeholder {
                 color: #64748b;
             }
+        }
+
+        .control :is(.input, .textarea, .select select):hover {
+            border-color: var(--bulma-border-hover);
+        }
+
+        .control :is(.input, .textarea, .select select):focus,
+        .control :is(.input, .textarea, .select select):focus-visible,
+        .control :is(.input, .textarea, .select select).is-focused,
+        .control :is(.input, .textarea, .select select).is-active {
+            border-color: var(--bulma-border-active);
+            box-shadow: none;
         }
 
         .control .icon {
@@ -123,7 +136,8 @@ export default {
 
             .control .input,
             .control.has-icons-left .input,
-            .control.has-icons-right .input {
+            .control.has-icons-right .input,
+            .control .select select {
                 background-color: rgba(10, 14, 22, 0.9);
                 border-color: #4b5563;
                 color: #f3f6fb;

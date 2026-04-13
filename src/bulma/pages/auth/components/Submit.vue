@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { app } from '@enso-ui/ui/src/pinia/app';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -58,14 +57,6 @@ export default {
                 user: faUser,
             }[this.icon] ?? this.icon;
         },
-        isWebview() {
-            return app().isWebview;
-        },
-        config() {
-            return this.isWebview
-                ? { headers: { isWebview: true } }
-                : {};
-        },
     },
 
     methods: {
@@ -74,7 +65,7 @@ export default {
             this.state.successful = false;
             this.$emit('submitting');
 
-            this.http.post(this.route(this.endpoint), this.payload, this.config)
+            this.http.post(this.route(this.endpoint), this.payload)
                 .then(({ data }) => {
                     this.state.successful = true;
                     this.$emit('success', data);

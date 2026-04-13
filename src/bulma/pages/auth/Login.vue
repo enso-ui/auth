@@ -6,8 +6,7 @@
         @success="init">
         <email v-model="payload.email"/>
         <password v-model="payload.password"/>
-        <remember v-model="payload.remember"
-            v-if="!isWebview"/>
+        <remember v-model="payload.remember"/>
         <template #footer>
             <div class="auth-footer is-flex is-justify-content-flex-end mt-3">
                 <router-link class="auth-footer-link is-flex is-align-items-center"
@@ -51,9 +50,6 @@ export default {
     computed: {
         meta() {
             return app().meta;
-        },
-        isWebview() {
-            return app().isWebview;
         },
     },
 

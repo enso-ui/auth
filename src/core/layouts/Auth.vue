@@ -1,5 +1,5 @@
 <script>
-import { loadGuestState } from '@enso-ui/ui/src/pinia/loadState';
+import { loadGuestState } from '@enso-ui/ui/src/modules/loadState';
 
 export default {
     name: 'Auth',

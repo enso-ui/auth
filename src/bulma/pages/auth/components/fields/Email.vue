@@ -5,14 +5,14 @@
                 v-focus
                 class="input"
                 type="email"
-                :class="{ 'is-danger': errors.has('email'), 'is-success': successful }"
+                :class="{ 'is-danger': errors.has('email'), 'is-success': state.successful }"
                 :placeholder="i18n('Email')"
                 autocomplete="email"
                 @input="$emit('update:modelValue', $event.target.value); errors.clear('email')">
             <span class="icon is-small is-left">
                 <fa :icon="faEnvelope"/>
             </span>
-            <span v-if="successful"
+            <span v-if="state.successful"
                 class="icon is-small is-right has-text-success">
                 <fa :icon="faCheck"/>
             </span>
@@ -50,12 +50,6 @@ export default {
     },
 
     emits: ['change', 'update:modelValue'],
-
-    computed: {
-        successful() {
-            return this.state.successful;
-        },
-    },
 
     data: () => ({
         faCheck,

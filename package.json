@@ -3,6 +3,10 @@
   "version": "3.1.11",
   "description": "UI auth package",
   "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest run"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/enso-ui/auth.git"
@@ -36,7 +40,12 @@
     "@enso-ui/forms": "^4.1.0",
     "@enso-ui/laravel-validation": "^3.1.0",
     "@enso-ui/ui": "^7.1.0",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "axios": "^1.11.0",
+    "jsdom": "^26.1.0",
     "pinia": "^3.0.3",
-    "vue": "^3.5.0"
+    "vitest": "^3.2.4",
+    "vue": "^3.5.0",
+    "sass-embedded": "^1.93.2"
   }
 }

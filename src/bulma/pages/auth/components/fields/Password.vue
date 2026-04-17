@@ -4,7 +4,7 @@
             <input :value="modelValue"
                 class="input"
                 :type="meta.content"
-                :class="{ 'is-danger': errors.has('password'), 'is-success': successful }"
+                :class="{ 'is-danger': errors.has('password'), 'is-success': state.successful }"
                 :placeholder="i18n('Password')"
                 :autocomplete="autocomplete"
                 @input="$emit('update:modelValue', $event.target.value); errors.clear('password')">
@@ -14,10 +14,10 @@
             <reveal-password :meta="meta"
                 :class="[
                     'has-text-dark',
-                    { 'is-spaced': successful || errors.has('password') }
+                    { 'is-spaced': state.successful || errors.has('password') }
                 ]"
-                v-if="modelValue && !successful"/>
-            <span v-if="successful"
+                v-if="modelValue && !state.successful"/>
+            <span v-if="state.successful"
                 class="icon is-small is-right has-text-success">
                 <fa :icon="faCheck"/>
             </span>
@@ -72,11 +72,5 @@ export default {
             content: 'password',
         },
     }),
-
-    computed: {
-        successful() {
-            return this.state.successful;
-        },
-    },
 };
 </script>

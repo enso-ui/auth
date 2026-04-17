@@ -6,7 +6,7 @@
                 <figure class="image is-48x48  is-clickable is-flex"
                     @click="$router.push({ name: 'login' }).catch(routerErrorHandler)">
                     <img src="/images/logo.svg"
-                        :alt="meta.appName">
+                        :alt="app().meta.appName">
                 </figure>
             </div>
             <form class="mb-2">
@@ -46,11 +46,7 @@ export default {
         },
     }),
 
-    computed: {
-        meta() {
-            return app().meta;
-        },
-    },
+    methods: { app },
 };
 </script>
 

@@ -4,7 +4,7 @@
             <input :value="modelValue"
                 class="input"
                 :type="meta.content"
-                :class="{ 'is-danger': errors.has('password'), 'is-success': successful }"
+                :class="{ 'is-danger': errors.has('password'), 'is-success': state.successful }"
                 :placeholder="i18n('Repeat Password')"
                 @input="$emit('update:modelValue', $event.target.value);
                     errors.clear('password')">
@@ -14,14 +14,14 @@
             <reveal-password :meta="meta"
                 :class="[
                     'has-text-dark',
-                    { 'mr-5': match || successful || errors.has('password') }
+                    { 'mr-5': match || state.successful || errors.has('password') }
                 ]"
-                v-if="modelValue && !successful"/>
+                v-if="modelValue && !state.successful"/>
             <span v-if="errors.has('password')"
                 class="icon is-small is-right has-text-danger">
                 <fa :icon="faExclamationTriangle"/>
             </span>
-            <span v-if="match && !errors.has('password') || successful"
+            <span v-if="match && !errors.has('password') || state.successful"
                 class="icon is-small is-right has-text-success">
                 <fa :icon="faCheck"/>
             </span>
@@ -69,11 +69,5 @@ export default {
             content: 'password',
         },
     }),
-
-    computed: {
-        successful() {
-            return this.state.successful;
-        },
-    },
 };
 </script>

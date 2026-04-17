@@ -9,14 +9,8 @@ export default {
     }),
 
     async created() {
-        await this.loadGuestState();
+        await loadGuestState();
         this.ready = true;
-    },
-
-    methods: {
-        loadGuestState() {
-            return loadGuestState();
-        },
     },
 
     render() {

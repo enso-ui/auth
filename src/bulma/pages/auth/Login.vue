@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import Errors from '@enso-ui/laravel-validation';
 import { app } from '@enso-ui/ui/src/pinia/app';
 import { layout } from '@enso-ui/ui/src/pinia/layout';
 import { auth } from '../../../pinia/auth';
@@ -35,10 +34,9 @@ export default {
         AuthForm, Email, Password, Remember,
     },
 
-    inject: ['i18n', 'route'],
+    inject: ['i18n'],
 
     data: () => ({
-        errors: new Errors(),
         payload: {
             device_name: navigator.userAgent || 'browser',
             email: '',
@@ -47,28 +45,13 @@ export default {
         },
     }),
 
-    computed: {
-        meta() {
-            return app().meta;
-        },
-    },
-
     methods: {
-        login() {
-            auth().login();
-        },
-        home(value) {
-            layout().setHome(value);
-        },
-        setShowQuote(value) {
-            app().setShowQuote(value);
-        },
         init() {
-            this.setShowQuote(this.meta.showQuote);
+            app().setShowQuote(app().meta.showQuote);
 
             setTimeout(() => {
-                this.login();
-                this.home(true);
+                auth().login();
+                layout().setHome(true);
             }, 500);
         },
     },

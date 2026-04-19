@@ -5,10 +5,6 @@
         :payload="payload"
         @success="success"
         @submitting="status = null">
-        <p class="has-text-success is-size-7"
-            v-if="status">
-            {{ status }}
-        </p>
         <email v-model="payload.email"/>
         <password v-model="payload.password"
             autocomplete="off"/>
@@ -17,6 +13,12 @@
         </p>
         <confirmation v-model="payload.password_confirmation"
             :match="match"/>
+        <template #footer>
+        <p class="has-text-success has-text-weight-bold has-text-centered is-size-7 mt-1"
+                v-if="status">
+                {{ status }}
+            </p>
+        </template>
     </auth-form>
 </template>
 
@@ -58,8 +60,9 @@ export default {
     methods: {
         success({ status }) {
             this.status = status;
+
             setTimeout(() => this.$router.push({ name: 'login' })
-                .catch(this.routerErrorHandler), 500);
+                .catch(this.routerErrorHandler), 1500);
         },
     },
 };

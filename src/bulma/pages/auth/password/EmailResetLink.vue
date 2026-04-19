@@ -5,11 +5,14 @@
         :payload="payload"
         @success="status = $event.status"
         @submitting="status = null">
-        <p class="has-text-success is-size-7"
-            v-if="status">
-            {{ status }}
-        </p>
-        <email v-model="payload.email"/>
+        <email class="mb-3"
+            v-model="payload.email"/>
+        <template #footer>
+            <p class="has-text-success has-text-weight-bold has-text-centered is-size-7 mt-1"
+                v-if="status">
+                {{ status }}
+            </p>
+        </template>
     </auth-form>
 </template>
 

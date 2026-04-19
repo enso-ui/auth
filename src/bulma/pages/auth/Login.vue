@@ -8,7 +8,7 @@
         <password v-model="payload.password"/>
         <remember v-model="payload.remember"/>
         <template #footer>
-            <div class="auth-footer is-flex is-justify-content-flex-end mt-3">
+            <div class="auth-footer is-flex is-justify-content-flex-end mt-1">
                 <router-link class="auth-footer-link is-flex is-align-items-center"
                     :to="{ name: 'password.email' }">
                     {{ i18n('Forgot password') }}

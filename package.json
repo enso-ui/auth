@@ -1,7 +1,7 @@
 {
   "name": "@enso-ui/auth",
   "version": "3.1.13",
-  "description": "UI auth package",
+  "description": "Authentication pages, auth store helpers, and password-strength utilities for Enso UI.",
   "main": "index.js",
   "scripts": {
     "test": "vitest",

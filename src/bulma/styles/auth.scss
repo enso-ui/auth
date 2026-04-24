@@ -1,5 +1,6 @@
 @import 'bulma/bulma';
 @import '@enso-ui/themes/bulma/overrides';
+@import '@app/sass/app';
 
 
 .auth-shell {
@@ -61,4 +62,3 @@
         min-height: 100vh;
     }
 }
-

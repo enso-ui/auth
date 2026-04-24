@@ -46,6 +46,12 @@
     position: relative;
 }
 
+.auth-layout {
+    .box {
+        border: none;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .auth-shell-body {
         min-height: 100vh;

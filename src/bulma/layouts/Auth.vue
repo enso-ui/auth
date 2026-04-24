@@ -1,5 +1,5 @@
 <template>
-    <section class="hero is-fullheight auth-shell">
+    <section class="hero is-fullheight auth-shell auth-layout">
         <div class="hero-body auth-shell-body">
             <div class="container auth-shell-container">
                 <core-auth v-slot="{ guestState }">
@@ -22,5 +22,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles/layouts/auth';
+@import '../styles/auth';
 </style>

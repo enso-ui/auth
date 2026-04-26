@@ -1,7 +1,7 @@
 <template>
-    <section class="hero is-fullheight auth-shell auth-layout">
-        <div class="hero-body auth-shell-body">
-            <div class="container auth-shell-container">
+    <section class="auth-layout hero is-fullheight">
+        <div class="hero-body">
+            <div class="container">
                 <core-auth v-slot="{ guestState }">
                     <router-view v-if="guestState"
                         :key="$route.path"/>

@@ -29,7 +29,7 @@ const commonPasswords = [
 
 const sequential = /(0123|1234|2345|3456|4567|5678|6789|7890|abcd|bcde|cdef|defg|qwer|asdf|zxcv)/iu;
 const repeated = /(.)\1{2,}/u;
-const clamp = value => Math.min(Math.max(value, 0), 4);
+const clamp = value => Math.min(Math.max(value, 0), 5);
 
 const score = password => {
     const normalized = password.toLowerCase();

@@ -6,18 +6,19 @@
         @success="success"
         @submitting="status = null">
         <email v-model="payload.email"/>
-        <password v-model="payload.password"
+        <password class="mb-0"
+            v-model="payload.password"
             autocomplete="off"/>
-        <p class="help">
+        <div class="has-text-centered">
             <password-strength :password="payload.password"/>
-        </p>
+        </div>
         <confirmation v-model="payload.password_confirmation"
             :match="match"/>
         <template #footer>
         <p class="has-text-success has-text-weight-bold has-text-centered is-size-7 mt-1"
-                v-if="status">
-                {{ status }}
-            </p>
+            v-if="status">
+            {{ status }}
+        </p>
         </template>
     </auth-form>
 </template>

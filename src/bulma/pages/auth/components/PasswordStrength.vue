@@ -11,7 +11,7 @@
                 height="4"
                 stroke-width="4"
                 :x="x(i)"
-                :stroke="i <= scoreValue ? 'green' : 'orangered'"/>
+                :stroke="i <= score ? 'green' : 'orangered'"/>
         </svg>
     </transition>
 </template>
@@ -30,14 +30,14 @@ export default {
     },
 
     data: () => ({
-        scoreValue: 0,
+        score: 0,
     }),
 
     watch: {
         password: {
             immediate: true,
             handler(password) {
-                this.scoreValue = passwordScore(password);
+                this.score = passwordScore(password);
             },
         },
     },

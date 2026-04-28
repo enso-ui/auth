@@ -6,6 +6,7 @@ import Login from '../src/bulma/pages/auth/Login.vue';
 import { auth } from '../src/pinia/auth';
 import { app } from '@enso-ui/ui/src/pinia/app';
 import { layout } from '@enso-ui/ui/src/pinia/layout';
+import passwordScore from '../src/utils/passwordScore';
 
 vi.mock('axios', () => ({
     default: {
@@ -85,5 +86,12 @@ describe('auth package', () => {
         expect(app().showQuote).toBe(true);
         expect(auth().isAuth).toBe(true);
         expect(layout().home).toBe(true);
+    });
+
+    it('scores password strength from zero to five', () => {
+        expect(passwordScore()).toBe(0);
+        expect(passwordScore('password')).toBe(0);
+        expect(passwordScore('LongEnough1!')).toBe(4);
+        expect(passwordScore('VeryLongPassword1!')).toBe(5);
     });
 });
